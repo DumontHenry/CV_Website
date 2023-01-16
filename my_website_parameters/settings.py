@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-r$o@2!qt0a65#u3)!7jwg8mjjaq5(cu*b8bing&1a61bk3%_!h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'cv-website.herokuapp.com']
 
 
 # Application definition
@@ -40,16 +40,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'CV_Website.apps.CvWebsiteConfig',
+    'storages',
+    'django_simple_cookie_consent.apps.DjangoSimpleCookieConsentConfig',
+
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # to process image view and upload etc....
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'my_website_parameters.urls'
@@ -82,22 +87,22 @@ WSGI_APPLICATION = 'my_website_parameters.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#       'default': {
+#           'ENGINE': 'django.db.backends.sqlite3',
+#           'NAME': BASE_DIR / 'db.sqlite3',
+#       }
 #     }
-# }
-
+# #
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'hdumont',
-        'PASSWORD': 'Hdumont_7',
-        'HOST': 'w3-django-cv.css0w2vylpek.us-east-1.rds.amazonaws.comgit status',
-        'PORT': '5432'
-    }
-}
+     'default': {
+          'ENGINE': 'django.db.backends.postgresql',
+          'NAME': 'postgres',
+          'USER': 'hdumont',
+          'PASSWORD': 'Hdumont_7',
+          'HOST': 'w3-django-cv.css0w2vylpek.us-east-1.rds.amazonaws.comgit status',
+          'PORT': '5432'
+      }
+ }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -159,3 +164,22 @@ EMAIL_HOST_USER = 'dolcesun.golf11072020@gmail.com'
 EMAIL_HOST_PASSWORD = 'ozclvpyidxqoxwun'
 
 
+# AWS connection
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_FILE_OVERWRITE = True
+AWS_ACCESS_KEY_ID = 'AKIATNB5J3WFY2SPPHRH'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'portfoliobuckethenry'
+
+# Free security add code line without package
+SECURE_SSL_REDIRECT = False
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+if os.getcwd() == '/app':
+    DEBUG = False

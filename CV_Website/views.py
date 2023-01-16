@@ -10,11 +10,6 @@ from django.core.mail import send_mail, BadHeaderError
 from .forms import PDFForm, ContactForm
 
 
-
-
-# --> create  a 404 page  as error
-# --> create a page after succesfull form submit
-
 # Create your views here.
 # https://docs.djangoproject.com/en/4.0/ref/request-response/#django.http.HttpRequest.META
 
@@ -52,11 +47,18 @@ def CV_Web(request):
                                phone=form.cleaned_data['phone'],
                              message=form.cleaned_data['message'])
             contact.save()
+            body = {
+                'name': form.cleaned_data['name'],
+                'email': form.cleaned_data['email'],
+                'phone': form.cleaned_data['phone'],
+                'message': form.cleaned_data['message']
+                }
+            message = "\n".join(body.values())
+
             try:
             # Send email to admin
                 send_mail('Feedback',
-                          form.cleaned_data['message'],
-                          form.cleaned_data['email'],
+                          message,
                           ['henryphilippe.dumont@gmail.com', form.cleaned_data['email']])
 
             finally:

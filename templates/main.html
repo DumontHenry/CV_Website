@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
+{% load django_simple_cookie_consent_tags %}
+
 {% csrf_token %}
 
 <html lang="en">
@@ -19,6 +21,8 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet"/>
         <script src="{% static 'js/animation.js' %}" defer ></script>
+        {% display_cookie_consent %}
+
 
 
          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -31,15 +35,6 @@ toggleButton.addEventListener('click', () => {
   navBar.classList.toggle('toggle');
 });
         </script>
-        <!-- bug to check for script underneath
-                <script src="{% static 'js/animation.js' %}"></script>
-
-                -->
-
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
 

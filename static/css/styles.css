@@ -11705,19 +11705,24 @@ background-color: #3FBF4C;
 
 }
 .skills__img img{
-    width: auto; /* make the image responsive */
+    max-width: 100%; /* make the image responsive */
     border-radius: .5rem;
+    float: left; /* place image next to the skills_box tags */
 }
 
 .skills__box{
     flex: 1; /* make it take up the remaining space */
+    float: left; /* align with the image */
+    width: 75%; /* adjust width to fit with the image */
 }
 
 .skills__img{
     flex: 0 0 25%; /* take up 25% of the container width */
-    max-width: 200px; /* set maximum width of the image */
+    max-width: 400px; /* set maximum width of the image */
     text-align: center; /* center the image */
 }
+
+
 
 /*
 =============================
