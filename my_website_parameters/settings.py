@@ -99,7 +99,7 @@ DATABASES = {
           'NAME': 'postgres',
           'USER': 'hdumont',
           'PASSWORD': 'Hdumont_7',
-          'HOST': 'w3-django-cv.css0w2vylpek.us-east-1.rds.amazonaws.comgit status',
+          'HOST': 'w3-django-cv.css0w2vylpek.us-east-1.rds.amazonaws.com',
           'PORT': '5432'
       }
  }
