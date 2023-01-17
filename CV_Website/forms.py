@@ -1,5 +1,4 @@
 from django import forms
-from phonenumber_field.modelfields import PhoneNumberField
 from .models import *
 from django.core.validators import RegexValidator
 

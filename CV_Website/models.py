@@ -1,6 +1,5 @@
 from django.db import models
 import uuid
-from phonenumber_field.modelfields import PhoneNumberField
 import datetime
 # Library for phone number : https://django-phonenumber-field.readthedocs.io/en/latest/
 # Create your models here.
