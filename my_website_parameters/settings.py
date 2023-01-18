@@ -184,4 +184,4 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
 if os.getcwd() == '/app':
-    DEBUG = False
+    DEBUG = True
