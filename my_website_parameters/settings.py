@@ -15,6 +15,7 @@ import os
 from datetime import timedelta
 import mimetypes
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -94,17 +95,21 @@ WSGI_APPLICATION = 'my_website_parameters.wsgi.application'
 #           'NAME': BASE_DIR / 'db.sqlite3',
 #       }
 #     }
-# #
+#
 DATABASES = {
      'default': {
           'ENGINE': 'django.db.backends.postgresql',
           'NAME': 'postgres',
-          'USER': 'hdumont',
-          'PASSWORD': 'Hdumont_7',
-          'HOST': 'w3-django-cv.css0w2vylpek.us-east-1.rds.amazonaws.com',
-          'PORT': '5432'
+          'USER': os.environ.get('DB_USER_CV'),
+          'PASSWORD': os.environ.get('DB_PASS_CV'),
+          'HOST': os.environ.get('DB_HOST_CV'),
+          'PORT': os.environ.get('DB_PORT_CV'),
       }
  }
+# print('pass_word :',os.getenv('DB_PASS_CV'))
+# print('user :',os.getenv('DB_PASS_USER'))
+# print('port :',os.getenv('DB_PORT_CV'))
+# print('Host :',  os.getenv('DB_HOST_CV'))
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -164,19 +169,19 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'dolcesun.golf11072020@gmail.com'
-EMAIL_HOST_PASSWORD = 'ozclvpyidxqoxwun'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER_CV')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD_CV')
 
-
+ADMIN_EMAIL = os.environ.get('PERSO_EMAIL_HOST_CV')
 # AWS connection
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_FILE_OVERWRITE = True
-AWS_ACCESS_KEY_ID = 'AKIATNB5J3WFY2SPPHRH'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'portfoliobuckethenry'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID_CV')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY_CV')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME_CV')
 
 # Free security add code line without package
 SECURE_SSL_REDIRECT = False

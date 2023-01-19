@@ -56,7 +56,7 @@ def CV_Web(request):
                 'message': form.cleaned_data['message']
             }
             from_email = settings.EMAIL_HOST_USER
-            to_admin_email = 'henryphilippe.dumont@gmail.com'
+            to_admin_email = settings.ADMIN_EMAIL
             cc_admin_email = [to_admin_email]
 
             message = '''
