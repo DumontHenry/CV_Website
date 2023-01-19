@@ -50,7 +50,8 @@ class Tracker(models.Model):
     user_hostname = models.CharField(max_length=100, null=True)
     user_agent = models.CharField(max_length=200)
     tracked_at = models.DateTimeField(auto_now_add=True)
-    user_server = models.CharField(max_length=200,  null=True,)
+    user_server = models.CharField(max_length=200, null=True)
+    user_port = models.CharField(max_length=200, null=True)
 
 class PDF(models.Model):
     author = models.CharField(max_length=100)

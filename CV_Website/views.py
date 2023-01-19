@@ -1,12 +1,13 @@
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse, redirect
 from django.contrib.auth.models import User
+from django.conf import settings
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 from django.contrib.auth import login, authenticate, logout  # add to imports
 from django.contrib import messages  # library to display flash message into the website
 
 from .models import Tracker, About, Portfolio, Contact, Category, PDF
-from django.core.mail import send_mail, BadHeaderError
+from django.core.mail import EmailMessage, BadHeaderError
 from .forms import PDFForm, ContactForm
 
 
@@ -35,7 +36,8 @@ def CV_Web(request):
         user_ip_address=user_ip_address,
         user_hostname=user_hostname,
         user_agent=user_agent,
-        user_server=user_server
+        user_server=user_server,
+        user_port=user_port
     )
 # =================================================
     if request.method == 'POST':
@@ -43,26 +45,36 @@ def CV_Web(request):
         if form.is_valid():
             # Save form data to Django models
             contact = Contact(name=form.cleaned_data['name'],
-                               email=form.cleaned_data['email'],
-                               phone=form.cleaned_data['phone'],
-                             message=form.cleaned_data['message'])
+                              email=form.cleaned_data['email'],
+                              phone=form.cleaned_data['phone'],
+                              message=form.cleaned_data['message'])
             contact.save()
             body = {
                 'name': form.cleaned_data['name'],
                 'email': form.cleaned_data['email'],
                 'phone': form.cleaned_data['phone'],
                 'message': form.cleaned_data['message']
-                }
-            message = "\n".join(body.values())
+            }
+            from_email = settings.EMAIL_HOST_USER
+            to_admin_email = 'henryphilippe.dumont@gmail.com'
+            cc_admin_email = [to_admin_email]
+
+            message = '''
+            From:\n{}\n
+            to:\n{}\n
+            Message:\n{}\n
+            Email:\n{}\n
+            Phone:\n{}\n
+            '''.format(form.cleaned_data['name'], to_admin_email, form.cleaned_data['message'], form.cleaned_data['email'], form.cleaned_data['phone'])
 
             try:
-            # Send email to admin
-                send_mail('Feedback',
-                          message,
-                          ['henryphilippe.dumont@gmail.com', form.cleaned_data['email']])
-
-            finally:
-                return redirect('success/') #HttpResponseRedirect('success/') # create a success page
+                # Send email to admin
+                email = EmailMessage('Feedback', message, from_email, [form.cleaned_data['email']], cc=cc_admin_email)
+                email.send()
+            except ValueError:
+                messages.error(request, 'Error sending your message')
+                return redirect('CV')
+            return redirect('success/')
         else:
             form = ContactForm()
     else:
