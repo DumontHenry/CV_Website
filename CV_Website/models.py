@@ -1,11 +1,13 @@
 from django.db import models
 import uuid
 import datetime
+from ckeditor_uploader.fields import RichTextUploadingField
+
 # Library for phone number : https://django-phonenumber-field.readthedocs.io/en/latest/
 # Create your models here.
 class About(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-    description = models.CharField(max_length=2000, null=True, blank=True)
+    description = models.TextField(blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=datetime.datetime.now)
     updated_on = models.DateTimeField(auto_now=datetime.datetime.now)
 

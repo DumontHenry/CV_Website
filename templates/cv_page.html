@@ -34,13 +34,13 @@
 
                 <!-- About Section Content-->
                 <div class="row">
-                    <div class="col-lg-4 ms-auto mx-auto -text_about"><p class="lead">{{ Abouts }}</p></div>
+                    <div class="col-lg-4 ms-auto mx-auto -text_about" style="text-align: center;"><p class="lead">{{  Abouts|linebreaks }}</p></div>
                 </div>
 
             </div>
         </section>
 
-<!-- TO TEST -->
+
 
 <!-- Portfolio Section-->
         <section class="page-section portfolio" id="portfolio">
@@ -109,7 +109,7 @@
                     {% for field in form %}
                       <div class="form-floating mb-3">
                           {{field}}
-                          {{ field.label_tag }} <!-- Imoirtant to keep field above the field.label_tag -->
+                          {{ field.label_tag }} <!-- Important to keep field above the field.label_tag -->
                       </div>
                     {% endfor %}
                     <div class="form-actions">

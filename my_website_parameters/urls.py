@@ -20,8 +20,9 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('72ea084a-e04c-479f-831a-1e4b6ea25474/', admin.site.urls),
     path('', include('CV_Website.urls')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # to check doc about the urlpatterns +=static(settings.MEDIA_URL , document_root=settings.MEDIA_ROOT)

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 from datetime import timedelta
+import mimetypes
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'CV_Website.apps.CvWebsiteConfig',
     'storages',
     'django_simple_cookie_consent.apps.DjangoSimpleCookieConsentConfig',
+
 
 ]
 
@@ -140,7 +142,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 MEDIA_URL = '/assets/img/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/assets')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -182,6 +184,10 @@ SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+#bug fix for admin
+mimetypes.add_type("text/css", ".css", True)
+
 
 if os.getcwd() == '/app':
     DEBUG = False

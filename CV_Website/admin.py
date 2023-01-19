@@ -13,7 +13,7 @@ class Contact_DisplayData(admin.ModelAdmin):
     list_display = ('id', 'name', 'email', 'phone', 'message', 'created_on', 'updated_on')
 
 class Tracker_DisplayData(admin.ModelAdmin):
-    list_display = ('user_ip_address', 'user_hostname', 'user_agent', 'tracked_at')
+    list_display = ('user_ip_address', 'user_hostname', 'user_agent', 'user_server', 'user_port', 'tracked_at')
 
 # class Category_DisplayData(admin.ModelAdmin):
 #     list_display = ('id', 'name', 'created_on', 'updated_on')
